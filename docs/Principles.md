@@ -1,4 +1,4 @@
-# Engineering Principles
+# Engineering Principles - How the AI and I work together
 
 ## Roles and Responsibility
 
