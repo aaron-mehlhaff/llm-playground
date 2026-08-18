@@ -1,4 +1,4 @@
-# Vision
+# Vision - Why we are doing this
 
 I am learning LLM coding best practices by building a simple tool that runs in the Mac Terminal, accepts a user-entered prompt, sends it to an LLM, and displays the response.
 
