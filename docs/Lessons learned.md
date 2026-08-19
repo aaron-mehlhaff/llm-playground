@@ -7,4 +7,5 @@
   1. The Change Test: What foreseeable change does this boundary make easier? If you can't name one, don't add it yet.
   2. The Comprehension Test: Does separating this make the system easier for a human to understand, or does the reader now have to bounce among five files to understand one operation?
   3. The Responsibility Test: Are these genuinely different jobs? "Interact with the user" and "communicate with an external API" are meaningfully different responsibilities. That's a good separation.
+* Architecture should manage complexity to make understanding easier for the reader and help focus their attention on the right things, not merely redistribute it across more files and folders.
 
