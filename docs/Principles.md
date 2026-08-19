@@ -1,76 +1,96 @@
 # Engineering Principles - How the AI and I work together
 
-## Roles and Responsibility
+These principles describe how we make engineering decisions for LLM Playground.
 
-The AI is my senior software architect and implementation partner.
+They apply whether implementation is performed by a human or an AI coding assistant.
+
+## Human Responsibility
+
+The AI may act as a senior software architect and implementation partner.
 
 I remain responsible for understanding and approving the system and its changes.
 
-The goal is not to produce the most code. The goal is to produce a system that is easy to understand, easy to extend, and easy to maintain.
+I should be able to understand the purpose and overall behavior of the code even if I could not have written every implementation detail myself.
 
-## Design Principles
+## Simplicity
+
+The goal is not to produce the most code.
+
+The goal is to produce a system that is easy to understand, easy to extend, and easy to maintain.
 
 * Prefer the simplest solution that satisfies today's requirements.
 * Build only what is required for the current goal.
 * Make the smallest reasonable change.
 * Prefer readable code over unnecessary abstractions or frameworks.
-* Favor decisions that keep future options open.
-* Every external dependency should be replaceable.
-* Identify decisions that would be expensive to reverse before making them.
-* Do not add speculative functionality just because it may be useful later.
-* Design for change ≠ implement future changes now.
-* Keep orchestration visible in main.py. Abstract details only when they begin to obscure the flow.
-* Pass information down from main.py when it represents an application choice. Let a component retrieve information itself when it is purely an implementation prerequisite of that component
+* Do not add speculative functionality merely because it may be useful later.
 
+## Architecture Should Reduce Complexity
 
+Architecture should compress complexity for the reader rather than merely redistribute it across more files, folders, abstractions, or configuration layers.
 
-## Before Implementation
+Create boundaries when they make responsibilities or application flow easier to understand.
 
-Before making changes:
+Do not separate code merely because separation is possible.
 
-1. Restate the problem in your own words.
-2. Identify the simplest solution that satisfies the current requirement.
-3. Explain the proposed approach.
-4. Identify the files you expect to create or modify.
-5. Identify any new dependencies.
-6. Explain which important decisions are easy to change later and which would be expensive to reverse.
-7. Point out anything that conflicts with these principles.
-8. If the request introduces unnecessary complexity, propose a simpler alternative.
+## Design for Change Without Building the Future
 
-Do not begin significant implementation until I approve the approach.
+Favor decisions that keep future options open.
 
-## During Implementation
+Design for change does not mean implementing future changes now.
 
-- Make small, understandable changes.
-- Explain significant changes.
-- Do not make unrelated improvements.
-- Do not install packages without explaining why they are needed and receiving approval.
-- Keep important prompts outside application code and under version control.
-- Keep external dependencies localized so they can be replaced without rewriting unrelated parts of the application. Do not add abstraction layers unless they solve a current problem.
-- When a change affects how the project is installed, configured, run, or used, propose the corresponding README update as part of the same change.
-- Keep the README accurate as the code evolves.
-- Organize the README for a non-developer reader, with essential setup and run instructions gathered clearly near the top.
-- Do not modify project documentation merely to make it agree with an implementation. If implementation reveals that a documented assumption is wrong, call that out so we can reconsider the decision.
+Before adding an abstraction or architectural layer, ask:
 
+* What concrete change would this make easier?
+* Does it make the system easier for a human to understand?
+* Are the separated pieces performing genuinely different responsibilities?
 
-## Human Oversight
+Important decisions that are expensive to reverse should receive more deliberate consideration than decisions that are easy to change later.
 
-* A human reviews every application change.
-* The AI must not make consequential architectural decisions silently.
-* I should be able to understand the purpose of the code even if I could not have written it myself.
+## Application Flow Should Remain Visible
+
+The high-level behavior of the application should remain easy for a human to follow.
+
+For the current architecture, `main.py` should make the orchestration of the application visible.
+
+Implementation details should be extracted when they begin to obscure that flow, not merely because they could live in another function or module.
+
+## Keep External Dependencies Localized
+
+External dependencies should be localized so they can be replaced without rewriting unrelated parts of the application.
+
+Do not add abstraction layers solely to make dependencies theoretically replaceable.
+
+A dependency should earn its place by solving a current requirement.
+
+## Distinguish Application Choices From Implementation Details
+
+Information representing application behavior or user choices should generally flow through the application explicitly.
+
+Information required only for a component to perform its internal job may remain within that component.
+
+For example, a user-selected model would be an application choice, while an API credential required internally by an LLM client is an implementation prerequisite.
+
+## Documentation Is Part of the System
+
+Documentation should remain useful to humans as the software evolves.
+
+The README should make the project understandable and runnable by a non-developer.
+
+Architecture documentation should describe how the system works rather than merely mirror whatever code happens to exist.
+
+When implementation reveals that a documented assumption is wrong, reconsider the decision rather than silently rewriting history.
 
 ## Security
 
-* Never put API keys, credentials, or other secrets directly into source code.
-* Never commit secrets to Git.
-* Do not add authentication or user accounts unless explicitly required.
+Secrets must remain outside source code and source control.
+
+Never commit API keys, credentials, passwords, or tokens.
+
+Authentication and other security machinery should not be introduced until required.
 
 ## Verification
 
-Before declaring a change complete:
+Writing code is not sufficient evidence that a change works.
 
-1. Add or update tests appropriate to the new behavior.
-2. Run the relevant tests.
-3. Run the application when appropriate.
-4. Report exactly what was tested and the results.
-5. Identify remaining limitations, assumptions, or known issues.
+Changes should be verified in a way appropriate to their behavior, including tests and running the application when relevant.
+
