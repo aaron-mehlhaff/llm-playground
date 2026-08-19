@@ -20,6 +20,7 @@ The goal is not to produce the most code. The goal is to produce a system that i
 * Do not add speculative functionality just because it may be useful later.
 * Design for change ≠ implement future changes now.
 * Keep orchestration visible in main.py. Abstract details only when they begin to obscure the flow.
+* Pass information down from main.py when it represents an application choice. Let a component retrieve information itself when it is purely an implementation prerequisite of that component
 
 
 
