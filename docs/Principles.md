@@ -18,6 +18,8 @@ The goal is not to produce the most code. The goal is to produce a system that i
 * Every external dependency should be replaceable.
 * Identify decisions that would be expensive to reverse before making them.
 * Do not add speculative functionality just because it may be useful later.
+* Design for change ≠ implement future changes now.
+
 
 ## Before Implementation
 
