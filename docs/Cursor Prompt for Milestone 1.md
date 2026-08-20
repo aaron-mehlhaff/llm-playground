@@ -1,4 +1,5 @@
 *This file is only stored here temporarily because I have a period without access to my primary laptop. Once development begins remove this file.*
+
 You are helping implement Milestone 1 of the LLM Playground project.
 
 Before doing anything, read the project documentation in `docs/`, especially:
