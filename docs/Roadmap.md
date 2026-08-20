@@ -16,6 +16,37 @@ This roadmap describes the current direction of the project, not a fixed commitm
 
 This establishes the smallest end-to-end LLM interaction before adding user input or additional functionality.
 
+### Acceptance Criteria
+
+Milestone 1 is complete when:
+
+* The application uses one LLM provider.
+* A predefined prompt is sent to the LLM.
+* The returned response is displayed in the terminal.
+* Provider-specific API logic is kept outside `main.py`.
+* The API key is supplied outside source code and is not committed to Git.
+* Missing credentials produce a clear, understandable error.
+* No user-entered prompt is required yet.
+* No session history, persistent storage, multi-provider support, configuration framework, web interface, or other later-milestone functionality is added.
+* Appropriate automated tests cover the new behavior without requiring a real paid API call where practical.
+* The application is run successfully against the real provider.
+* README setup/run instructions are updated if the implementation changes what a user needs to configure or run.
+* Relevant tests pass before the milestone is considered complete.
+
+### Explicit Non-Goals
+
+This milestone does not include:
+
+* interactive prompting
+* multiple LLM providers
+* prompt comparison
+* response history
+* persistent storage
+* structured data Q&A
+* generalized provider abstractions
+* a `src/` hierarchy unless implementation reveals a concrete need
+
+
 ## Milestone 2: Interactive Prompting
 
 **Outcome:** A user can enter a prompt in the terminal, send it to the LLM, and see the response.
